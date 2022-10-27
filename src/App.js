@@ -2,25 +2,25 @@ import { useState } from 'react'
 import './index.scss'
 
 function App() {
-	const [counter, setCounter] = useState(0)
+	const [openModal, setOpenModal] = useState(false)
 
-	const counterPlus = () => {
-		setCounter(counter + 1)
-	}
-
-	const counterMinus = () => {
-		setCounter(counter - 1)
-	}
 	return (
 		<div className='app'>
-			<div className='counterWrapper'>
-				<h2>Счетчик:</h2>
-				<h1>{counter}</h1>
-				<div className='counterBtnWrapper'>
-					<button onClick={counterMinus}>- Минус</button>
-					<button onClick={counterPlus}>+ Плюс</button>
+			<button onClick={() => setOpenModal(true)} className='openModal'>
+				🎃 Тыкни меня
+			</button>
+
+			{openModal && (
+				<div className='fullPage'>
+					<div className={openModal ? 'modal active' : 'modal'}>
+						<span onClick={() => setOpenModal(false)}>X</span>
+						<img
+							src='https://media.giphy.com/media/0eMLDAv9hsmX5ZDkxk/giphy.gif'
+							alt='Giphy'
+						/>
+					</div>
 				</div>
-			</div>
+			)}
 		</div>
 	)
 }
