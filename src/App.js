@@ -1,25 +1,26 @@
 import { useState } from 'react'
+import { Game } from './components/game'
+import { Result } from './components/result'
+import { allQuestions } from './questions'
 import './index.scss'
 
-function App() {
-	const [openModal, setOpenModal] = useState(false)
+const App = () => {
+	const [doneGame, setDoneGame] = useState(0)
+	const [correctlyApp, setCorrectlyApp] = useState(0)
 
+	const isDoneQuestion = () => {
+		setDoneGame(doneGame + 1)
+	}
 	return (
-		<div className='app'>
-			<button onClick={() => setOpenModal(true)} className='openModal'>
-				🎃 Тыкни меня
-			</button>
-
-			{openModal && (
-				<div className='fullPage'>
-					<div className={openModal ? 'modal active' : 'modal'}>
-						<span onClick={() => setOpenModal(false)}>X</span>
-						<img
-							src='https://media.giphy.com/media/0eMLDAv9hsmX5ZDkxk/giphy.gif'
-							alt='Giphy'
-						/>
-					</div>
-				</div>
+		<div className='App'>
+			{doneGame !== allQuestions.length ? (
+				<Game
+					isDoneQuestion={isDoneQuestion}
+					setCorrectlyApp={setCorrectlyApp}
+					correctlyApp={correctlyApp}
+				/>
+			) : (
+				<Result correctlyApp={correctlyApp} />
 			)}
 		</div>
 	)
